@@ -13,4 +13,4 @@
 
 ## Deployed Link
 
-- Sandbox link: [deployed url on sandbox](https://codesandbox.io/s/magical-williams-9b2r1)
+- Sandbox link: [deployed url on sandbox](https://codesandbox.io/s/github/401-js-WesamAlmasri/resty/tree/main/?file=/src/App.js)
