@@ -9,7 +9,7 @@
 
 ## UML
 
-![uml](assets/resty1.png)
+![uml](assets/resty2.png)
 
 ## Deployed Link
 
