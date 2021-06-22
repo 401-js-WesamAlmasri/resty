@@ -18,7 +18,7 @@ class History extends React.Component {
   render() {
     return (
       <div className='history_container'>
-        {this.props.history.map((req, index) => {
+        {this.props.history && this.props.history.map((req, index) => {
           return (
             <div key={index} className='history_row'>
               <span
