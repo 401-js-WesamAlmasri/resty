@@ -22,9 +22,8 @@ class Form extends React.Component {
           .set('Content-Type', 'application/json')
           .accept('application/json')
           .send(this.props.body);
-
       this.props.updateResultsHandler(
-        response.count,
+        response.body.count || response.body.length,
         response.headers,
         response.body,
         null,
