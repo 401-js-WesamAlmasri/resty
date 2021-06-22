@@ -1,17 +1,35 @@
 .results_container {
-  width: 80%;
+  flex: 1;
   min-height: 30vh;
   // height: 100vh;
   // overflow: scroll;
   padding: 2%;
-  flex: 1;
   margin-bottom: 10px;
   background-color: #efefef;
   border: ridge 5px #dedede;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   .loading{
     text-align: center;
     line-height: 50%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid black;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    align-self: center;
+    animation: rotate 500ms linear infinite;
+    
+  }
+  
+  @keyframes rotate {
+    to {
+      transform: rotateZ(360deg);
+    }
   }
 
   .error {
