@@ -16,10 +16,14 @@ class App extends React.Component {
       error: null,
       loading: false,
       history: [],
+      url: 'https://swapi.dev/api/people/',
+      method: 'get',
+      body: ''
     };
 
     this.updateResultsHandler = this.updateResultsHandler.bind(this);
     this.updateHistoryHandler = this.updateHistoryHandler.bind(this);
+    this.updateFormHandler = this.updateFormHandler.bind(this);
   }
 
   updateResultsHandler(count, headers, results, error, loading) {
@@ -29,17 +33,32 @@ class App extends React.Component {
   updateHistoryHandler(history) {
     this.setState({ history });
   }
+  
+  updateFormHandler(form) {
+    this.setState({ ...form });
+  }
+  componentDidMount(){
+    const history = JSON.parse(localStorage.getItem('requests'));
+    this.setState({history});
+  }
 
   render() {
     return (
       <div className='app'>
         <Header />
         <Form
+          url={this.state.url}
+          method={this.state.method}
+          body={this.state.body}
+          updateFormHandler={this.updateFormHandler}
           updateResultsHandler={this.updateResultsHandler}
           updateHistoryHandler={this.updateHistoryHandler}
            />
         <div className='results_body'>
-          <History history={this.state.history} />
+          <History 
+            history={this.state.history}
+            updateFormHandler={this.updateFormHandler}
+          />
           <Results
             count={this.state.count}
             headers={this.state.headers}

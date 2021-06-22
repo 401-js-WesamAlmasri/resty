@@ -5,19 +5,12 @@ const superagent = require('superagent');
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      url: 'https://swapi.dev/api/people/',
-      method: 'get',
-      body: ''
-    };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
   onChangeHandler(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    this.props.updateFormHandler({[e.target.name]: e.target.value})
   }
 
   async onSubmitHandler(e) {
@@ -25,10 +18,10 @@ class Form extends React.Component {
     this.props.updateResultsHandler(null, null, null, null, true);
 
     try {
-      const response = await superagent[this.state.method](this.state.url)
+      const response = await superagent[this.props.method](this.props.url)
           .set('Content-Type', 'application/json')
           .accept('application/json')
-          .send(this.state.body);
+          .send(this.props.body);
 
       this.props.updateResultsHandler(
         response.count,
@@ -38,9 +31,9 @@ class Form extends React.Component {
         false
       );
       const storeObj = {
-        url: this.state.url,
-        method: this.state.method,
-        body: this.state.body
+        url: this.props.url,
+        method: this.props.method,
+        body: this.props.body
       }
       const prevRequests = JSON.parse(localStorage.getItem('requests')); // [{url, method, body}, {}, ...]
       if(!prevRequests){
@@ -63,20 +56,20 @@ class Form extends React.Component {
           <div className='url_container'>
             <label htmlFor='url'>
               <input
-                type='url'
                 onChange={this.onChangeHandler}
-                value={this.state.url}
+                type='url'
+                value={this.props.url}
                 name='url'
                 id='url'
               />
             </label>
             <button type='submit'>GO!</button>
           </div>
-          <div onChange={this.onChangeHandler} className='methods_container'>
-            <div>
+          <div className='methods_container'>
+            <div onChange={this.onChangeHandler}>
               <label
                 htmlFor='get-method'
-                className={`${this.state.method === 'get' ? 'active' : ''}`}
+                className={`${this.props.method === 'get' ? 'active' : ''}`}
               >
                 GET
                 <input
@@ -89,7 +82,7 @@ class Form extends React.Component {
               </label>
               <label
                 htmlFor='post-method'
-                className={`${this.state.method === 'post' ? 'active' : ''}`}
+                className={`${this.props.method === 'post' ? 'active' : ''}`}
               >
                 POST
                 <input
@@ -101,14 +94,14 @@ class Form extends React.Component {
               </label>
               <label
                 htmlFor='put-method'
-                className={`${this.state.method === 'put' ? 'active' : ''}`}
+                className={`${this.props.method === 'put' ? 'active' : ''}`}
               >
                 PUT
                 <input type='radio' value='put' name='method' id='put-method' />
               </label>
               <label
                 htmlFor='delete-method'
-                className={`${this.state.method === 'delete' ? 'active' : ''}`}
+                className={`${this.props.method === 'delete' ? 'active' : ''}`}
               >
                 DELETE
                 <input
@@ -126,6 +119,8 @@ class Form extends React.Component {
               id='body'
               cols='30'
               rows='10'
+              value={this.props.body}
+              onChange={this.onChangeHandler}
             ></textarea>
           </div>
         </form>
