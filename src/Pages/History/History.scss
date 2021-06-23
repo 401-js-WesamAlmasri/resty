@@ -1,0 +1,77 @@
+.history {
+  flex: 1;
+  display: flex;
+  padding: 2% 2%;
+  width: 100%;
+
+  .info {
+    flex: 1;
+    border: grey 2px groove;
+    padding: 1%;
+    font-size: 20px;
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .re-run-btn {
+        // border: none;
+        color: white;
+        background-color: mediumblue;
+        border-radius: 5px;
+        margin-top: 25px;
+        padding: 10px 20px;
+        cursor: pointer;
+        
+        &:hover {
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+    }
+  }
+  .history_elements {
+    flex: 1;
+
+    .history_title {
+
+        margin-bottom: 25px;
+    }
+
+    .history_row {
+      display: flex;
+      margin-bottom: 15px;
+      align-items: center;
+
+      span.method {
+        margin-right: 25px;
+        color: white;
+        font-weight: 700;
+        padding: 5px 15px;
+        border-radius: 5px;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+          transition: 0.2s;
+        }
+        &.get {
+          background-color: #5f00f7;
+        }
+        &.post {
+          background-color: #008827;
+        }
+
+        &.put {
+          background-color: #dda838;
+        }
+        &.delete {
+          background-color: #ff0000;
+        }
+      }
+    }
+  }
+}
